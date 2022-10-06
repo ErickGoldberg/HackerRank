@@ -30,20 +30,11 @@ function readLine() {
  */
 
 function diagonalDifference(arr) {
-    var diagonal1 = 0;
-    var diagonal2 = 0;
-    var j = 0;
-    
-    for(var i = 0; i < arr.length; i++){
-        diagonal1 += arr[i][i]
+    let difference = 0
+    for (let i = 0; i < arr.length; i++) {
+        difference += arr[i][i] - arr[i][arr.length - (i+1)]
     }
-    for(var u = 2; u >= 0; u--){
-        console.log({j,u})    
-        diagonal2 += arr[j][u]
-        j++
-    }
-    var diferenca = Math.abs(diagonal1-diagonal2);
-    return diferenca;
+    return Math.abs(difference)
 }
 
 function main() {
