@@ -30,3 +30,36 @@ function readLine() {
  *  1. INTEGER a
  *  2. INTEGER b
  */
+
+function squares(a, b) {
+   let square = 0, i = 1, count = 0;
+    while (square <= b) {
+        square = i * i;
+        if (square >= a && square <= b) {
+            count += 1;
+        }
+        i += 1;
+    }
+    return count;
+
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const q = parseInt(readLine().trim(), 10);
+
+    for (let qItr = 0; qItr < q; qItr++) {
+        const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+        const a = parseInt(firstMultipleInput[0], 10);
+
+        const b = parseInt(firstMultipleInput[1], 10);
+
+        const result = squares(a, b);
+
+        ws.write(result + '\n');
+    }
+
+    ws.end();
+}
