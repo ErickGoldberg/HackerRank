@@ -27,3 +27,31 @@ function readLine() {
  *  1. INTEGER p
  *  2. INTEGER q
  */
+
+function kaprekarNumbers(p, q) {
+     let result = Array.from(
+    { length: q - p + 1 },
+    (value, index) => index + p
+  ).reduce((target, value, index) => {
+    let square = `${value ** 2}`;
+    let right = +square.substring(
+      square.length - `${value}`.length,
+      square.length
+    );
+    let left = +square.substring(0, square.length - `${value}`.length);
+
+    left + right == value && target.push(value);
+
+    return target;
+  }, []);
+
+  console.log(!result.length ? "INVALID RANGE" : result.join(" "));
+}
+
+function main() {
+    const p = parseInt(readLine().trim(), 10);
+
+    const q = parseInt(readLine().trim(), 10);
+
+    kaprekarNumbers(p, q);
+}
