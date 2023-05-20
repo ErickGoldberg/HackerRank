@@ -30,3 +30,25 @@ function readLine() {
  *  1. STRING s
  *  2. LONG_INTEGER n
  */
+
+function repeatedString(s, n) {
+    let occurances = (s.split("a").length - 1);
+   let max = Math.floor(n / s.length);
+   let totalAs= occurances * max;
+   totalAs += (s.slice(0, n % s.length).split("a").length - 1);
+   return totalAs;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const s = readLine();
+
+    const n = parseInt(readLine().trim(), 10);
+
+    const result = repeatedString(s, n);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
