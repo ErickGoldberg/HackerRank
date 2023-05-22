@@ -32,3 +32,43 @@ function readLine() {
  *  3. INTEGER m
  *  4. INTEGER s
  */
+
+function howManyGames(p, d, m, s) {
+    let totalCost = p;
+  let gameCount = 0;
+  
+  while(totalCost <= s){
+    p = p - d;
+    if(p <= m){
+      totalCost = totalCost + m;
+      gameCount++;
+    }else{
+      totalCost = totalCost + p;
+      gameCount++;
+    }
+    
+  }
+  
+  return gameCount;
+
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+    const p = parseInt(firstMultipleInput[0], 10);
+
+    const d = parseInt(firstMultipleInput[1], 10);
+
+    const m = parseInt(firstMultipleInput[2], 10);
+
+    const s = parseInt(firstMultipleInput[3], 10);
+
+    const answer = howManyGames(p, d, m, s);
+
+    ws.write(answer + '\n');
+
+    ws.end();
+}
