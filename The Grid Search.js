@@ -30,3 +30,71 @@ function readLine() {
  *  1. STRING_ARRAY G
  *  2. STRING_ARRAY P
  */
+
+function gridSearch(G, P) {
+    for (let i = 0, itotal = G.length - P.length; i <= itotal; i++) {
+    let indexes = [];
+
+    for (let k = 0, ktotal = G[i].length - P[0].length; k <= ktotal; k++) {
+      if (G[i].slice(k, k + P[0].length) == P[0]) {
+        indexes.push(k);
+      }
+    }
+
+    if (indexes.length > 0) {
+      for (const index of indexes) {
+        for (let j = i + 1, jtotal = P.length + i; j < jtotal; j++) {
+          if (G[j].slice(index, index + P[j - i].length) != P[j - i]) {
+            break;
+          }
+          if (j - i + 1 == P.length) {
+            return 'YES';
+          }
+        }
+      }
+    }
+  }
+
+  return 'NO';
+
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const t = parseInt(readLine().trim(), 10);
+
+    for (let tItr = 0; tItr < t; tItr++) {
+        const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+        const R = parseInt(firstMultipleInput[0], 10);
+
+        const C = parseInt(firstMultipleInput[1], 10);
+
+        let G = [];
+
+        for (let i = 0; i < R; i++) {
+            const GItem = readLine();
+            G.push(GItem);
+        }
+
+        const secondMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+        const r = parseInt(secondMultipleInput[0], 10);
+
+        const c = parseInt(secondMultipleInput[1], 10);
+
+        let P = [];
+
+        for (let i = 0; i < r; i++) {
+            const PItem = readLine();
+            P.push(PItem);
+        }
+
+        const result = gridSearch(G, P);
+
+        ws.write(result + '\n');
+    }
+
+    ws.end();
+}
