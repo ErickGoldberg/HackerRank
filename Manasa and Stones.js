@@ -31,3 +31,36 @@ function readLine() {
  *  2. INTEGER a
  *  3. INTEGER b
  */
+
+function stones(n, a, b) {
+    return new Array(n)
+    .fill(0)
+    .map((item, index) => a * (n - index - 1) + b * index)
+    .sort((a, b) => a - b)
+    .reduce((target, item) => {
+      !target.includes(item) && target.push(item);
+
+      return target;
+    }, []);
+
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const T = parseInt(readLine().trim(), 10);
+
+    for (let TItr = 0; TItr < T; TItr++) {
+        const n = parseInt(readLine().trim(), 10);
+
+        const a = parseInt(readLine().trim(), 10);
+
+        const b = parseInt(readLine().trim(), 10);
+
+        const result = stones(n, a, b);
+
+        ws.write(result.join(' ') + '\n');
+    }
+
+    ws.end();
+}
