@@ -28,3 +28,33 @@ function readLine() {
  * The function is expected to return a STRING_ARRAY.
  * The function accepts STRING_ARRAY unsorted as parameter.
  */
+
+function bigSorting(unsorted) {
+    // Write your code here
+    return unsorted.sort((a, b) => {
+        if (a.length == b.length) {
+            return a > b ? 1 : -1;
+        }
+
+        return a.length - b.length;
+    });
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const n = parseInt(readLine().trim(), 10);
+
+    let unsorted = [];
+
+    for (let i = 0; i < n; i++) {
+        const unsortedItem = readLine();
+        unsorted.push(unsortedItem);
+    }
+
+    const result = bigSorting(unsorted);
+
+    ws.write(result.join('\n') + '\n');
+
+    ws.end();
+}
