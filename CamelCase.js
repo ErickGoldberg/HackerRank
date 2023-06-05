@@ -28,3 +28,22 @@ function readLine() {
  * The function is expected to return an INTEGER.
  * The function accepts STRING s as parameter.
  */
+
+function camelcase(s) {
+    // Write your code here
+    const strArr = s.split(/(?=[A-Z])/)
+    
+    return  strArr.length ;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const s = readLine();
+
+    const result = camelcase(s);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
