@@ -28,3 +28,33 @@ function readLine() {
  * The function is expected to return a STRING.
  * The function accepts STRING s as parameter.
  */
+
+function pangrams(s) {
+    // Write your code here
+    let hash = {};
+    s = s.toLowerCase();
+    
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] !== ' ') {
+            hash[s[i]] = s[i];
+        }
+    }
+    
+    if (Object.keys(hash).length === 26) {
+        return "pangram";
+    } else {
+        return "not pangram";
+    }
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const s = readLine();
+
+    const result = pangrams(s);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
