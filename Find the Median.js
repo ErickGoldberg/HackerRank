@@ -28,3 +28,29 @@ function readLine() {
  * The function is expected to return an INTEGER.
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
+
+function findMedian(arr) {
+    // Write your code here
+    const srtArr = arr.sort((a, b) => a - b);
+  const mid = Math.floor(srtArr.length / 2);
+
+  if (srtArr.length % 2 === 0) {
+    return (srtArr[mid - 1] + srtArr[mid]) / 2;
+  }
+
+  return srtArr[mid];
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const n = parseInt(readLine().trim(), 10);
+
+    const arr = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
+
+    const result = findMedian(arr);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
