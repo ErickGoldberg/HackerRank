@@ -28,3 +28,31 @@ function readLine() {
  * The function is expected to return an INTEGER.
  * The function accepts STRING_ARRAY arr as parameter.
  */
+
+function gemstones(arr) {
+    // Write your code here
+    let combined  = arr.join('');
+  let unique = [...new Set(combined)];
+  let result = unique.filter(ch => 
+      arr.every(str => str.includes(ch)));
+  return result.length;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const n = parseInt(readLine().trim(), 10);
+
+    let arr = [];
+
+    for (let i = 0; i < n; i++) {
+        const arrItem = readLine();
+        arr.push(arrItem);
+    }
+
+    const result = gemstones(arr);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
