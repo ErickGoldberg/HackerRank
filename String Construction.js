@@ -28,3 +28,35 @@ function readLine() {
  * The function is expected to return an INTEGER.
  * The function accepts STRING s as parameter.
  */
+
+function stringConstruction(s) {
+    // Write your code here
+    const slen = (s) ? s.length : 0;
+     if(slen < 1 || slen > 100000) {
+          return 0; 
+     }
+     
+     let p = [];
+     return s.split('').filter((el, i) => {
+          if (p.indexOf(el) < 0) {
+               p.push(el);
+               return el;  
+          }
+     }).length;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const q = parseInt(readLine().trim(), 10);
+
+    for (let qItr = 0; qItr < q; qItr++) {
+        const s = readLine();
+
+        const result = stringConstruction(s);
+
+        ws.write(result + '\n');
+    }
+
+    ws.end();
+}
